@@ -7,5 +7,5 @@ function handleFiles(e) {
     window.ReactNativeWebView.postMessage('default prevented');
 }
 document.addEventListener("message", function(event) {
-    alert(event);
+    alert(event.data);
 });
