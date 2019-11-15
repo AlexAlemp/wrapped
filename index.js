@@ -4,7 +4,7 @@ inputElement.addEventListener("click", handleFiles, false);
 console.log(files);
 function handleFiles(e) {
     e.preventDefault();
-    window.ReactNativeWebView.postMessage('default prevented');
+    window.ReactNativeWebView.postMessage('file_upload');
 }
 document.addEventListener("message", function(event) {
     alert(JSON.parse(event.data));
