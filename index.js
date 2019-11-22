@@ -7,5 +7,6 @@ function handleFiles(e) {
     window.ReactNativeWebView.postMessage('file_upload');
 }
 document.addEventListener("message", function(event) {
+    alert(JSON.stringify(event));
     window.ReactNativeWebView.postMessage(event.data);
 });
