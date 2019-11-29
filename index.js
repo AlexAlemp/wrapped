@@ -6,7 +6,36 @@ function handleFiles(e) {
     e.preventDefault();
     window.ReactNativeWebView.postMessage('file_upload');
 }
+const b64toBlob = (b64Data, contentType='', sliceSize=512) => {
+    const byteCharacters = atob(b64Data);
+    const byteArrays = [];
+
+    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+        const slice = byteCharacters.slice(offset, offset + sliceSize);
+
+        const byteNumbers = new Array(slice.length);
+        for (let i = 0; i < slice.length; i++) {
+            byteNumbers[i] = slice.charCodeAt(i);
+        }
+
+        const byteArray = new Uint8Array(byteNumbers);
+
+        byteArrays.push(byteArray);
+    }
+
+    const blob = new Blob(byteArrays, {type: contentType});
+    return blob;
+}
 document.addEventListener("message", function(event) {
-    alert(event.data);
-    window.ReactNativeWebView.postMessage(event.data);
+    const fileData = JSON.parse(event.data);
+    const dataURI = `data:${fileData.type};base64, ${fileData.data}`
+    const fileBlob = b64toBlob(dataURI);
+    var formData = new FormData();
+    formData.append("file", fileBlob, fileData.fileName);
+    fetch({method: "POST", url:  'https://api.ellorem.xyz/public/file-upload', body: formData}).then(response => {
+        alert(jJSON.stringify(response));
+
+    }).catch(error => {
+        alert(jJSON.stringify(error));
+    });
 });
