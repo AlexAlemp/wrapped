@@ -5,6 +5,18 @@ console.log(files);
 function handleFiles(e) {
 
     e.preventDefault();
+   /* const fileBlob = b64toBlob(dataURI.replace(/\s/g, ''));
+    var formData = new FormData();
+    formData.append("file", fileBlob);
+
+    fetch('https://api.ellorem.xyz/public/file-upload', { method: "POST", body: formData}).then(response => {
+        return response.json();
+    }).then(response => {
+        alert('success');
+    })
+        .catch(error => {
+            alert('error');
+        });*/
     window.ReactNativeWebView.postMessage('file_upload');
 }
 function b64toBlob(dataURI) {
@@ -26,14 +38,12 @@ document.addEventListener("message", function(event) {
     var formData = new FormData();
     formData.append("file", fileBlob);
 
-    fetch('https://api.ellorem.xyz/public/file-upload',{method: "POST", body: formData}).then(response => {
+    fetch('https://api.ellorem.xyz/public/file-upload', { method: "POST", body: formData}).then(response => {
         return response.json();
     }).then(response => {
         alert('success');
-        window.ReactNativeWebView.postMessage(response);
     })
         .catch(error => {
             alert('error');
-            window.ReactNativeWebView.postMessage(JSON.stringify(error));
-    });
+        });
 });
