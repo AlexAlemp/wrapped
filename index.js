@@ -27,10 +27,12 @@ document.addEventListener("message", function(event) {
     formData.append("file", fileBlob, fileData.fileName);
     alert('form');
 
-    fetch({method: "POST", url:  'https://api.ellorem.xyz/public/file-upload', body: formData}).then(response => {
-        alert(jJSON.stringify(response));
-
-    }).catch(error => {
+    fetch({method: "POST", url:  'https://api.ellorem.xyz/public/file-upload', body: {data: formData}}).then(response => {
+        return response.json();
+    }).then(response => {
+        alert(response);
+    })
+        .catch(error => {
         alert(jJSON.stringify(error));
     });
 });
