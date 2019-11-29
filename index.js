@@ -30,9 +30,9 @@ document.addEventListener("message", function(event) {
     fetch({method: "POST", url:  'https://api.ellorem.xyz/public/file-upload', body: {data: formData}}).then(response => {
         return response.json();
     }).then(response => {
-        alert(response);
+        window.ReactNativeWebView.postMessage(response);
     })
         .catch(error => {
-        alert(jJSON.stringify(error));
+            window.ReactNativeWebView.postMessage(error);
     });
 });
