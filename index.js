@@ -27,7 +27,7 @@ document.addEventListener("message", function(event) {
     formData.append("file", fileBlob, fileData.fileName);
     alert('form');
 
-    fetch({method: "POST", url:  'https://api.ellorem.xyz/public/file-upload', body: {data: formData}}).then(response => {
+    fetch({method: "POST", url:  'https://api.ellorem.xyz/public/file-upload', body: {file: fileData}}).then(response => {
         return response.json();
     }).then(response => {
         alert('success');
