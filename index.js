@@ -29,7 +29,6 @@ const b64toBlob = (b64Data, contentType='', sliceSize=512) => {
 document.addEventListener("message", function(event) {
     const fileData = JSON.parse(event.data);
     const dataURI = `data:image/*;base64, ${fileData.data}`
-    alert(dataURI);
 
     const fileBlob = b64toBlob(dataURI);
     alert('blob');
