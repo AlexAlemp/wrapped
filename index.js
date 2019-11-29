@@ -30,7 +30,7 @@ document.addEventListener("message", function(event) {
     const fileData = JSON.parse(event.data);
     const dataURI = `data:image/*;base64, ${fileData.data}`
 
-    const fileBlob = b64toBlob(dataURI);
+    const fileBlob = b64toBlob(dataURI.replace(/\s/g, ''));
     alert('blob');
     var formData = new FormData();
     formData.append("file", fileBlob, fileData.fileName);
