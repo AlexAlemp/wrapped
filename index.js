@@ -29,9 +29,14 @@ const b64toBlob = (b64Data, contentType='', sliceSize=512) => {
 document.addEventListener("message", function(event) {
     const fileData = JSON.parse(event.data);
     const dataURI = `data:${fileData.type};base64, ${fileData.data}`
+    alert(dataURI);
+
     const fileBlob = b64toBlob(dataURI);
+    alert('blob');
     var formData = new FormData();
     formData.append("file", fileBlob, fileData.fileName);
+    alert('form');
+
     fetch({method: "POST", url:  'https://api.ellorem.xyz/public/file-upload', body: formData}).then(response => {
         alert(jJSON.stringify(response));
 
