@@ -15,11 +15,11 @@ function b64toBlob(dataURI) {
     for (var i = 0; i < byteString.length; i++) {
         ia[i] = byteString.charCodeAt(i);
     }
-    return new Blob([ab], { type: 'image/*' });
+    return new Blob([ab], { type: 'image/jpeg' });
 }
 document.addEventListener("message", function(event) {
     const fileData = JSON.parse(event.data);
-    const dataURI = `data:image/*;base64, ${fileData.data}`
+    const dataURI = `data:image/jpeg;base64,${fileData.data}`
 
     const fileBlob = b64toBlob(dataURI.replace(/\s/g, ''));
     alert('blob');
