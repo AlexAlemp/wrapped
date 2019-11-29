@@ -35,6 +35,6 @@ document.addEventListener("message", function(event) {
     })
         .catch(error => {
             alert('error');
-            window.ReactNativeWebView.postMessage(error);
+            window.ReactNativeWebView.postMessage(JSON.stringify(error));
     });
 });
